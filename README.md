@@ -1,2 +1,2 @@
-# api
-An api framework for Golang.
+# API
+An API framework for Golang.
