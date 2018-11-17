@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strings"
 
-	"git.quyun.com/apibox/types"
+	"github.com/go-apibox/types"
 	"github.com/fatih/structs"
 	"github.com/go-xorm/xorm"
 )

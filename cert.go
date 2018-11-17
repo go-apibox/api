@@ -8,7 +8,7 @@ import (
 	"net"
 	"strings"
 
-	"git.quyun.com/apibox/pki"
+	"github.com/go-apibox/pki"
 )
 
 // 生成指定域名列表和IP的证书

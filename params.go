@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"time"
 
-	"git.quyun.com/apibox/filter"
-	"git.quyun.com/apibox/types"
+	"github.com/go-apibox/filter"
+	"github.com/go-apibox/types"
 )
 
 type Params struct {

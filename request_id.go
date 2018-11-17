@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"git.quyun.com/apibox/cache"
+	"github.com/go-apibox/cache"
 	"github.com/streadway/simpleuuid"
 )
 

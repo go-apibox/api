@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"git.quyun.com/apibox/logging"
-	"git.quyun.com/apibox/utils"
+	"github.com/go-apibox/logging"
+	"github.com/go-apibox/utils"
 	"github.com/urfave/negroni"
 )
 

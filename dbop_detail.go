@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"strings"
 
-	"git.quyun.com/apibox/utils"
+	"github.com/go-apibox/utils"
 	"github.com/fatih/structs"
 	"github.com/go-xorm/core"
 	"github.com/go-xorm/xorm"

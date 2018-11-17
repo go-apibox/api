@@ -5,7 +5,7 @@ package api
 import (
 	"net/http"
 
-	"git.quyun.com/apibox/session"
+	"github.com/go-apibox/session"
 )
 
 type Session struct {

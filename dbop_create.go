@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"git.quyun.com/apibox/filter"
-	"git.quyun.com/apibox/utils"
+	"github.com/go-apibox/filter"
+	"github.com/go-apibox/utils"
 	"github.com/go-xorm/xorm"
 )
 
