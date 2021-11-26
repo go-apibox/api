@@ -28,7 +28,6 @@ func (ln tcpKeepAliveListener) Accept() (c net.Conn, err error) {
 	tc.SetKeepAlivePeriod(3 * time.Minute)
 	return tc, nil
 }
-
 func (app *App) listen(netType, laddr string) (net.Listener, error) {
 	ln, err := net.Listen(netType, laddr)
 	for _, listenEventHandler := range app.listenEventHandlers {
@@ -48,7 +47,7 @@ func (app *App) signalHandler(ln net.Listener) {
 
 		// Wait for a SIGINT or SIGKILL:
 		sig := <-c
-		app.Logger.Notice("Caught signal %s: shutting down.", sig)
+		app.Logger.Noticef("Caught signal %s: shutting down.", sig)
 		// Stop listening (and unlink the socket if unix type):
 		ln.Close()
 

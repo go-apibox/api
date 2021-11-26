@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/go-apibox/types"
 	"github.com/fatih/structs"
-	"github.com/go-xorm/xorm"
+	"github.com/go-apibox/types"
+	"xorm.io/xorm"
 )
 
 func List(c *Context, beans interface{}, params *Params, queryDefines map[string]string) interface{} {
@@ -124,7 +124,7 @@ func SessionListJoin(c *Context, session *xorm.Session, beans interface{}, param
 			if colTag := modelDefine.FieldGetTag(field, "column"); colTag != nil {
 				columnName = colTag.Params[0]
 			} else {
-				columnName = session.Engine().ColumnMapper.Obj2Table(field)
+				columnName = session.Engine().GetColumnMapper().Obj2Table(field)
 			}
 			tableField := fmt.Sprintf("`%s`", columnName)
 
@@ -330,7 +330,7 @@ func SessionListJoin(c *Context, session *xorm.Session, beans interface{}, param
 						if colTag := modelDefine.FieldGetTag(hdField, "column"); colTag != nil {
 							columnName = colTag.Params[0]
 						} else {
-							columnName = session.Engine().ColumnMapper.Obj2Table(hdField)
+							columnName = session.Engine().GetColumnMapper().Obj2Table(hdField)
 						}
 						omitColumns = append(omitColumns, columnName)
 						hiddenListFields = append(hiddenListFields, hdField)
@@ -350,7 +350,7 @@ func SessionListJoin(c *Context, session *xorm.Session, beans interface{}, param
 				if colTag := modelDefine.FieldGetTag(v, "column"); colTag != nil {
 					tableField = colTag.Params[0]
 				} else {
-					tableField = session.Engine().ColumnMapper.Obj2Table(v)
+					tableField = session.Engine().GetColumnMapper().Obj2Table(v)
 				}
 
 				// 字段表名前缀处理

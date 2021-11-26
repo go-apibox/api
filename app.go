@@ -257,7 +257,7 @@ func (app *App) Run(routes []*Route) error {
 	}
 
 	// 运行
-	app.Logger.Notice("listening on %s", app.Addr)
+	app.Logger.Noticef("listening on %s", app.Addr)
 
 	// 是否禁止应用运行为pid=1（根进程）的子进程
 	var allowWild bool
@@ -382,7 +382,7 @@ func (app *App) InitDb() {
 					cfg.GetDefaultInt(keyPrefix+"max_open_conns", 100),
 				)
 				if err != nil {
-					app.Logger.Warning("(api) add mysql db failed: %s", err.Error())
+					app.Logger.Warningf("(api) add mysql db failed: %s", err.Error())
 				} else {
 					app.DB.SetMysqlShowSQL(dbAlias, cfg.GetDefaultBool(keyPrefix+"show_sql", false))
 					app.DB.SetMysqlLogLevel(dbAlias, cfg.GetDefaultString(keyPrefix+"log_level", "error"))
@@ -415,7 +415,7 @@ func (app *App) InitDb() {
 					dbAlias, dbPath, persistent = fields[0], fields[1], fields[2]
 				}
 				sqliteDbs[dbAlias] = dbPath
-				sqliteDbPersitents[dbAlias] = (persistent == "true")
+				sqliteDbPersitents[dbAlias] = persistent == "true"
 			}
 		}
 	}
@@ -456,7 +456,7 @@ func (app *App) InitDb() {
 			for dbAlias, dbPath := range sqliteDbs {
 				err := app.DB.AddSqlite3(dbAlias, dbPath, sqliteDbPersitents[dbAlias])
 				if err != nil {
-					app.Logger.Warning("(api) add sqlite3 db failed: %s", err.Error())
+					app.Logger.Warningf("(api) add sqlite3 db failed: %s", err.Error())
 				} else {
 					keyPrefix := "sqlite3." + dbAlias + "."
 					app.DB.SetSqlite3ShowSQL(dbAlias, cfg.GetDefaultBool(keyPrefix+"show_sql", false))

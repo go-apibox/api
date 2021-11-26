@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-apibox/filter"
 	"github.com/go-apibox/utils"
-	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
+	"xorm.io/core"
+	"xorm.io/xorm"
 )
 
 func Update(c *Context, bean interface{}, params *Params) interface{} {
@@ -83,7 +83,7 @@ func SessionUpdateEx(c *Context, session *xorm.Session, bean interface{}, params
 					if colTag := modelDefine.FieldGetTag(field, "column"); colTag != nil {
 						columnName = colTag.Params[0]
 					} else {
-						columnName = session.Engine().ColumnMapper.Obj2Table(field)
+						columnName = session.Engine().GetColumnMapper().Obj2Table(field)
 					}
 
 					qDefines, qDefined := allQueryDefines[field]
@@ -129,7 +129,7 @@ func SessionUpdateEx(c *Context, session *xorm.Session, bean interface{}, params
 					if colTag := modelDefine.FieldGetTag(field, "column"); colTag != nil {
 						columnName = colTag.Params[0]
 					} else {
-						columnName = session.Engine().ColumnMapper.Obj2Table(field)
+						columnName = session.Engine().GetColumnMapper().Obj2Table(field)
 					}
 					columns = append(columns, columnName)
 				}
@@ -142,7 +142,7 @@ func SessionUpdateEx(c *Context, session *xorm.Session, bean interface{}, params
 	}
 
 	// ID作为条件
-	affected, err := session.Cols(columns...).Id(pk).Update(modelVal.Addr().Interface())
+	affected, err := session.Cols(columns...).ID(pk).Update(modelVal.Addr().Interface())
 	if err != nil {
 		c.App.Logger.Error("(dbop error): [UpdateFailed] %s", err.Error())
 		return c.Error.New(ErrorInternalError, "UpdateFailed", modelName).SetMessage("Update failed.")
