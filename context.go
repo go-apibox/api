@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/go-xorm/xorm"
 	"github.com/gorilla/context"
 	"github.com/gorilla/sessions"
 	"github.com/gorilla/websocket"
+	"xorm.io/xorm"
 )
 
 type Context struct {

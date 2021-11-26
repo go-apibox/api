@@ -4,8 +4,8 @@ import (
 	"reflect"
 
 	"github.com/go-apibox/utils"
-	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
+	"xorm.io/core"
+	"xorm.io/xorm"
 )
 
 func Delete(c *Context, bean interface{}, params *Params) interface{} {
@@ -18,7 +18,6 @@ func Delete(c *Context, bean interface{}, params *Params) interface{} {
 
 	session := db.NewSession()
 	defer session.Close()
-
 	return SessionDelete(c, session, bean, params)
 }
 
@@ -74,11 +73,10 @@ func SessionDelete(c *Context, session *xorm.Session, bean interface{}, params *
 	var affected int64
 	var err error
 	pModel := modelVal.Addr().Interface()
-
 	if softDelete {
-		affected, err = session.Id(pk).Update(pModel)
+		affected, err = session.ID(pk).Update(pModel)
 	} else {
-		affected, err = session.Id(pk).Delete(pModel)
+		affected, err = session.ID(pk).Delete(pModel)
 	}
 	if err != nil {
 		c.App.Logger.Error("(dbop error): [DeleteFailed] %s", err.Error())

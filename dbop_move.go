@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 )
 
 func Move(c *Context, bean interface{}, srcIndex, dstIndex uint32) interface{} {
@@ -60,7 +60,7 @@ func SessionMove(c *Context, session *xorm.Session, bean interface{}, srcIndex, 
 	if colTag := modelDefine.FieldGetTag(showIndexField, "column"); colTag != nil {
 		columnName = colTag.Params[0]
 	} else {
-		columnName = session.Engine().ColumnMapper.Obj2Table(showIndexField)
+		columnName = session.Engine().GetColumnMapper().Obj2Table(showIndexField)
 	}
 	tableName := modelDefine.TableName(session.Engine())
 

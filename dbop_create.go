@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-apibox/filter"
 	"github.com/go-apibox/utils"
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 )
 
 func Create(c *Context, bean interface{}, params *Params) interface{} {
@@ -78,7 +78,7 @@ func SessionCreateEx(c *Context, session *xorm.Session, bean interface{}, params
 		if colTag := modelDefine.FieldGetTag(field, "column"); colTag != nil {
 			columnName = colTag.Params[0]
 		} else {
-			columnName = session.Engine().ColumnMapper.Obj2Table(field)
+			columnName = session.Engine().GetColumnMapper().Obj2Table(field)
 		}
 
 		if v := params.Get(field); v != nil {
@@ -348,7 +348,7 @@ func SessionCreateEx(c *Context, session *xorm.Session, bean interface{}, params
 				if colTag := modelDefine.FieldGetTag(pkFields[0], "column"); colTag != nil {
 					pkColumnName = colTag.Params[0]
 				} else {
-					pkColumnName = session.Engine().ColumnMapper.Obj2Table(pkFields[0])
+					pkColumnName = session.Engine().GetColumnMapper().Obj2Table(pkFields[0])
 				}
 				sql := fmt.Sprintf("UPDATE `%s` SET `%s`=? WHERE `%s`=?", tableName, columnName, pkColumnName)
 				_, err := session.Exec(sql, last_insert_id, last_insert_id)

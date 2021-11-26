@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 )
 
 type ModelManager struct {
@@ -207,7 +207,7 @@ func (m *ModelDefine) TableName(engine *xorm.Engine) string {
 	if m.tableName != "" {
 		return m.tableName
 	}
-	return engine.TableMapper.Obj2Table(m.MainModelName)
+	return engine.GetTableMapper().Obj2Table(m.MainModelName)
 }
 
 // Fields return all fields of model.

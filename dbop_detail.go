@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/go-apibox/utils"
 	"github.com/fatih/structs"
-	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
+	"github.com/go-apibox/utils"
+	"xorm.io/core"
+	"xorm.io/xorm"
 )
 
 func Detail(c *Context, bean interface{}, params *Params) interface{} {
@@ -99,7 +99,7 @@ func SessionDetailJoin(c *Context, session *xorm.Session, bean interface{}, para
 			if colTag := modelDefine.FieldGetTag(pkField, "column"); colTag != nil {
 				columnName = colTag.Params[0]
 			} else {
-				columnName = session.Engine().ColumnMapper.Obj2Table(pkField)
+				columnName = session.Engine().GetColumnMapper().Obj2Table(pkField)
 			}
 			pkCols = append(pkCols, columnName)
 		}
@@ -118,7 +118,7 @@ func SessionDetailJoin(c *Context, session *xorm.Session, bean interface{}, para
 					if colTag := modelDefine.FieldGetTag(hdField, "column"); colTag != nil {
 						columnName = colTag.Params[0]
 					} else {
-						columnName = session.Engine().ColumnMapper.Obj2Table(hdField)
+						columnName = session.Engine().GetColumnMapper().Obj2Table(hdField)
 					}
 					omitColumns = append(omitColumns, columnName)
 					hiddenDetailFields = append(hiddenDetailFields, hdField)

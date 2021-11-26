@@ -8,9 +8,9 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"xorm.io/xorm/log"
 
-	"github.com/go-xorm/core"
-	"github.com/go-xorm/xorm"
+	"xorm.io/xorm"
 )
 
 type DbManager struct {
@@ -62,15 +62,15 @@ func HasDriver(name string) bool {
 func setLogLevel(engine *xorm.Engine, level string) {
 	switch level {
 	case "error":
-		engine.Logger().SetLevel(core.LOG_ERR)
+		engine.Logger().SetLevel(log.LOG_ERR)
 	case "warning":
-		engine.Logger().SetLevel(core.LOG_WARNING)
+		engine.Logger().SetLevel(log.LOG_WARNING)
 	case "info":
-		engine.Logger().SetLevel(core.LOG_INFO)
+		engine.Logger().SetLevel(log.LOG_INFO)
 	case "debug":
-		engine.Logger().SetLevel(core.LOG_DEBUG)
+		engine.Logger().SetLevel(log.LOG_DEBUG)
 	case "off":
-		engine.Logger().SetLevel(core.LOG_OFF)
+		engine.Logger().SetLevel(log.LOG_OFF)
 	}
 }
 
