@@ -118,14 +118,14 @@ func WriteResponse(c *Context, data interface{}) {
 			}
 		}
 
-		c.App.Logger.Debug("\n"+
+		c.App.Logger.Debugf("\n"+
 			">>>>>>>>>>>>>>>>>>>>> DEBUG >>>>>>>>>>>>>>>>>>>>\n"+
 			"%s\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", string(jsonBytes))
 
 	case "code":
 		apiData := makeData(apiAction, data)
 
-		c.App.Logger.Debug("DEBUG: %s", apiData.CODE)
+		c.App.Logger.Debugf("DEBUG: %s", apiData.CODE)
 	}
 
 	WriteData(c.Response(), c.Request(), data, apiAction, apiFormat, apiCallback, apiDebug)

@@ -38,10 +38,10 @@ func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 		ipPrefix = r.RemoteAddr + " - "
 	}
 
-	l.Info("%vStarted %s %s", ipPrefix, r.Method, r.RequestURI)
+	l.Infof("%vStarted %s %s", ipPrefix, r.Method, r.RequestURI)
 
 	next(rw, r)
 
 	res := rw.(negroni.ResponseWriter)
-	l.Info("%vCompleted %v %s in %v", ipPrefix, res.Status(), http.StatusText(res.Status()), time.Since(start))
+	l.Infof("%vCompleted %v %s in %v", ipPrefix, res.Status(), http.StatusText(res.Status()), time.Since(start))
 }
