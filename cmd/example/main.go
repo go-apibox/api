@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/apibox/api"
+	"github.com/go-apibox/api"
 	"log"
 	"os"
 )

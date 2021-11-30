@@ -1,4 +1,4 @@
-module github.com/apibox/api
+module github.com/go-apibox/api
 
 go 1.16
 
